@@ -1,4 +1,5 @@
 Supply Chain Assistant
+
 The Supply Chain Assistant is a full-stack web application designed to provide real-time analytics and decision support for supply chain management. It offers a comprehensive set of features for monitoring inventory levels, tracking deliveries, generating demand forecasts, and analyzing cost metrics.
 Features
 
