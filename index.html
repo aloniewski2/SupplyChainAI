@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chat-container { height: calc(100vh - 320px); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto p-4">
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <!-- Header and Menu Bar -->
+            <div class="mb-6">
+                <h1 class="text-2xl font-bold text-gray-800 mb-4">Supply Chain Assistant</h1>
+                
+                <!-- Menu Bar -->
+                <div class="grid grid-cols-5 gap-4 mb-4">
+                    <!-- Inventory Menu -->
+                    <div class="relative group">
+                        <button class="w-full px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium">
+                            📦 Inventory
+                        </button>
+                        <div class="absolute hidden group-hover:block w-64 bg-white border rounded-lg shadow-lg mt-1 z-10">
+                            <div class="p-2">
+                                <button onclick="setQuestion('Show inventory status')" class="w-full text-left px-4 py-2 hover:bg-blue-50 rounded">
+                                    📊 Current Stock Levels
+                                </button>
+                                <button onclick="setQuestion('Check low stock items')" class="w-full text-left px-4 py-2 hover:bg-blue-50 rounded">
+                                    ⚠️ Low Stock Alerts
+                                </button>
+                                <button onclick="setQuestion('Show warehouse capacity')" class="w-full text-left px-4 py-2 hover:bg-blue-50 rounded">
+                                    🏭 Warehouse Capacity
+                                </button>
+                                <button onclick="setQuestion('Show inventory trends')" class="w-full text-left px-4 py-2 hover:bg-blue-50 rounded">
+                                    📈 Inventory Trends
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Menu -->
+                    <div class="relative group">
+                        <button class="w-full px-4 py-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 font-medium">
+                            🚚 Deliveries
+                        </button>
+                        <div class="absolute hidden group-hover:block w-64 bg-white border rounded-lg shadow-lg mt-1 z-10">
+                            <div class="p-2">
+                                <button onclick="setQuestion('Show delivery performance')" class="w-full text-left px-4 py-2 hover:bg-green-50 rounded">
+                                    📊 Performance Metrics
+                                </button>
+                                <button onclick="setQuestion('Check shipping delays')" class="w-full text-left px-4 py-2 hover:bg-green-50 rounded">
+                                    ⏰ Shipping Delays
+                                </button>
+                                <button onclick="setQuestion('Show carrier analysis')" class="w-full text-left px-4 py-2 hover:bg-green-50 rounded">
+                                    🔍 Carrier Analysis
+                                </button>
+                                <button onclick="setQuestion('Track active shipments')" class="w-full text-left px-4 py-2 hover:bg-green-50 rounded">
+                                    📍 Active Shipments
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Forecast Menu -->
+                    <div class="relative group">
+                        <button class="w-full px-4 py-2 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 font-medium">
+                            📈 Forecast
+                        </button>
+                        <div class="absolute hidden group-hover:block w-64 bg-white border rounded-lg shadow-lg mt-1 z-10">
+                            <div class="p-2">
+                                <button onclick="setQuestion('Show demand forecast')" class="w-full text-left px-4 py-2 hover:bg-purple-50 rounded">
+                                    📊 Demand Forecast
+                                </button>
+                                <button onclick="setQuestion('Show market trends')" class="w-full text-left px-4 py-2 hover:bg-purple-50 rounded">
+                                    📈 Market Trends
+                                </button>
+                                <button onclick="setQuestion('Show seasonal predictions')" class="w-full text-left px-4 py-2 hover:bg-purple-50 rounded">
+                                    🗓 Seasonal Analysis
+                                </button>
+                                <button onclick="setQuestion('Show risk assessment')" class="w-full text-left px-4 py-2 hover:bg-purple-50 rounded">
+                                    ⚠️ Risk Assessment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Costs Menu -->
+                    <div class="relative group">
+                        <button class="w-full px-4 py-2 bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 font-medium">
+                            💰 Costs
+                        </button>
+                        <div class="absolute hidden group-hover:block w-64 bg-white border rounded-lg shadow-lg mt-1 z-10">
+                            <div class="p-2">
+                                <button onclick="setQuestion('Show cost breakdown')" class="w-full text-left px-4 py-2 hover:bg-orange-50 rounded">
+                                    📊 Cost Breakdown
+                                </button>
+                                <button onclick="setQuestion('Show efficiency metrics')" class="w-full text-left px-4 py-2 hover:bg-orange-50 rounded">
+                                    📈 Efficiency Metrics
+                                </button>
+                                <button onclick="setQuestion('Show budget analysis')" class="w-full text-left px-4 py-2 hover:bg-orange-50 rounded">
+                                    💵 Budget Analysis
+                                </button>
+                                <button onclick="setQuestion('Show savings opportunities')" class="w-full text-left px-4 py-2 hover:bg-orange-50 rounded">
+                                    💫 Savings Options
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Menu -->
+                    <div class="relative group">
+                        <button class="w-full px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 font-medium">
+                            📊 Analytics
+                        </button>
+                        <div class="absolute hidden group-hover:block w-64 bg-white border rounded-lg shadow-lg mt-1 z-10">
+                            <div class="p-2">
+                                <button onclick="setQuestion('Show all metrics')" class="w-full text-left px-4 py-2 hover:bg-red-50 rounded">
+                                    📊 All Metrics
+                                </button>
+                                <button onclick="setQuestion('Show performance overview')" class="w-full text-left px-4 py-2 hover:bg-red-50 rounded">
+                                    📈 Performance Overview
+                                </button>
+                                <button onclick="setQuestion('Show supply chain health')" class="w-full text-left px-4 py-2 hover:bg-red-50 rounded">
+                                    🏥 Chain Health
+                                </button>
+                                <button onclick="setQuestion('Show KPI dashboard')" class="w-full text-left px-4 py-2 hover:bg-red-50 rounded">
+                                    🎯 KPI Dashboard
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Container -->
+            <div class="chat-container overflow-auto mb-4 p-4 border rounded-lg bg-gray-50">
+                <div id="chat-messages" class="space-y-4"></div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="flex space-x-2">
+                <input 
+                    type="text" 
+                    id="user-input" 
+                    class="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    placeholder="Type your question or select from the menus above..."
+                >
+                <button 
+                    onclick="sendMessage()"
+                    class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                    Send
+                </button>
+                <button 
+                    onclick="resetChat()"
+                    class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                >
+                    Reset
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function setQuestion(question) {
+            userInput.value = question;
+            sendMessage();
+        }
+
+        function addMessage(role, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `p-3 rounded-lg ${
+                role === 'user' 
+                    ? 'bg-blue-500 text-white ml-12' 
+                    : 'bg-gray-100 mr-12'
+            }`;
+            
+            const roleSpan = document.createElement('span');
+            roleSpan.className = 'font-bold';
+            roleSpan.textContent = role === 'user' ? 'You: ' : 'Assistant: ';
+            
+            const contentSpan = document.createElement('span');
+            contentSpan.innerHTML = content.replace(/\n/g, '<br>');
+            
+            messageDiv.appendChild(roleSpan);
+            messageDiv.appendChild(contentSpan);
+            chatMessages.appendChild(messageDiv);
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            addMessage('user', message);
+            userInput.value = '';
+
+            try {
+                const response = await fetch('/api/v1/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        include_metrics: true
+                    }),
+                });
+
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    addMessage('assistant', data.response);
+                } else {
+                    addMessage('assistant', 'Sorry, I encountered an error.');
+                }
+            } catch (error) {
+                addMessage('assistant', 'Sorry, I encountered an error: ' + error.message);
+            }
+        }
+
+        async function resetChat() {
+            chatMessages.innerHTML = '';
+            addMessage('assistant', 'Hello! I\'m your supply chain assistant. How can I help you today?');
+        }
+
+        // Initialize chat
+        resetChat();
+    </script>
+</body>
+</html>
